@@ -1,0 +1,32 @@
+use crate::ops::runner;
+use crate::support::banner::print_banner;
+use crate::support::cfg::loader::Setup;
+use crate::support::error::AppResult;
+use crate::support::log::format::{countdown, gap, lr, ly};
+
+pub async fn execute(setup: &Setup) -> AppResult<()> {
+    let mut cycle: u64 = 0;
+
+    loop {
+        cycle += 1;
+        ly(&format!("Starting automation cycle number {}", cycle));
+
+        let base = (cycle as usize - 1) * setup.accounts.len();
+
+        for (index, account) in setup.accounts.iter().enumerate() {
+            if index > 0 {
+                gap();
+            }
+            if let Err(err) = runner::run_account(setup, base + index, account).await {
+                lr(&format!(
+                    "Account {} could not sign in with {}",
+                    index + 1,
+                    err.kind()
+                ));
+            }
+        }
+
+        countdown(setup.config.sleep_seconds(), "Next cycle starts in").await;
+        print_banner();
+    }
+}
