@@ -46,8 +46,3 @@ COLOURS
    green  : a step that succeeded
    yellow : a step that was skipped, with a note
    red    : an account or the program stopped
-
-NOTES
-   The seal envelope is sent as v1; when the server rejects it the log says the
-   seal header was rejected, never the body. The watch time is counted down
-   before the claim because a claim that arrives too early is refused.
