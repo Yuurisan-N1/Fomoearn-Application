@@ -1,0 +1,16 @@
+/target/
+dist/
+*.log
+*.rs.bk
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+session.json
+keybox.xml
+src/support/const/net.rs
+src/domain/account.rs
+src/net/attest.rs
+src/net/client.rs
+src/net/keybox.rs
+src/net/seal.rs

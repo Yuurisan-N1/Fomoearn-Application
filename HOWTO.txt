@@ -1,0 +1,53 @@
+Fomo Earn HOWTO
+
+Short version, five steps.
+
+1. INSTALL RUST
+   Windows / Linux / macOS: https://rustup.rs  then reopen the terminal and check:
+       rustc --version
+
+2. FILL data.txt
+   One account per line, the separator is a pipe:
+       email|password
+   Blank lines and lines starting with # are ignored. The password must not
+   hold a second pipe.
+
+3. FILL proxy.txt (optional)
+   One proxy per line, a proxy is paired by position and moves on every cycle:
+       socks5://user:pass@host:port
+       http://host:port
+   Leave the file empty for a direct connection. The log prints a proxy
+   masked, never the host, the port or the credentials.
+
+4. BUILD AND RUN
+       cargo build --release
+       Windows :  target\release\fomoearn-bot.exe
+       Linux   :  ./target/release/fomoearn-bot
+       Stop    :  press Ctrl+C once
+   No argument is needed, a bare run is the full cycle. The pause between
+   cycles comes from config.json:
+       {"settings": {"sleep_seconds": 3600}}
+
+5. WHAT YOU SHOULD SEE
+   The banner, then the cycle line, then one line per credited video with the
+   amount in green, then a countdown to the next cycle. A refusal is a single
+   red line with the reason and never the raw server body.
+
+KEEP keybox.xml NEXT TO THE BINARY
+   The attestation chain is built from keybox.xml: one ECDSA key and its
+   certificate chain. Without that file the account stops before the task
+   feed with a config error.
+
+EXTRA MODES (debugging only)
+       ./fomoearn-bot probe      read every gate, claim nothing
+       ./fomoearn-bot selftest   offline checks, no network
+
+COLOURS
+   green  : a step that succeeded
+   yellow : a step that was skipped, with a note
+   red    : an account or the program stopped
+
+NOTES
+   The seal envelope is sent as v1; when the server rejects it the log says the
+   seal header was rejected, never the body. The watch time is counted down
+   before the claim because a claim that arrives too early is refused.
