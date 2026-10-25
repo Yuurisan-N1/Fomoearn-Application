@@ -8,7 +8,7 @@ dist/
 Thumbs.db
 session.json
 keybox.xml
-src/support/const/net.rs
+src/support/consts/net.rs
 src/domain/account.rs
 src/net/attest.rs
 src/net/client.rs
