@@ -99,8 +99,8 @@ source $HOME/.cargo/env
 **Clone the repository:**
 
 ```bash
-git clone https://github.com/Yuurisan-N1/Fomoearn-Bot.git
-cd Fomoearn-Bot
+git clone https://github.com/Yuurisan-N1/Fomoearn-Application.git
+cd Fomoearn-Application
 ```
 
 ---
@@ -260,7 +260,7 @@ Pressing `Ctrl+C` once sets a shutdown signal, prints the stopped message, and e
 ## File Structure
 
 ```text
-Fomoearn-Bot/
+Fomoearn-Application/
 ├── .github/
 │   └── workflows/
 │       └── build.yml                    # CI: 3-platform matrix build
